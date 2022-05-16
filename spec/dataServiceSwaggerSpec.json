@@ -1,0 +1,148 @@
+{
+    "swagger" : "2.0",
+
+    "info" : {
+      "description" : "An API for Aidoc data",
+      "version" : "1.0.0",
+      "title" : "Aidoc Data API",
+      "license" : {
+        "name" : "Apache 2.0",
+        "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+    },
+    "schemes" : [ "http", "https" ],
+    "paths" : {
+      "/patient" : {
+        "get": {
+          "description" : "Search patients\n",
+          "operationId" : "SearchPatients",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "in": "query",
+            "name" : "identifier",
+            "required" : false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+          "responses" : {
+            "200" : {
+              "description" : "Success",
+              "schema": {
+                "$ref": "#/definitions/Patients" 
+              }
+            },
+            "500" : {
+              "description" : "Server error"
+            }
+          }
+        }
+      },
+      "/patient/{id}" : {
+        "get" : {
+          "description" : "Return a specific Patient by internal id\n",
+          "operationId" : "GetPatientById",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "in": "path",
+            "name" : "id",
+            "required" : true,
+            "type": "string"
+          }],
+          "responses" : {
+            "200" : {
+              "description" : "Success",
+              "schema": {
+                "$ref": "#/definitions/Patient" 
+              }
+            },
+            "400" : {
+              "description" : "Invalid message body"
+            },
+            "500" : {
+              "description" : "Server error"
+            }
+          }
+        }
+      },
+      "/test" : {
+        "get": {
+          "description" : "Search imaging tests\n",
+          "operationId" : "SearchTests",
+          "produces" : [ "application/json" ],
+          "parameters" : [ {
+            "in": "query",
+            "name" : "accessionNumber",
+            "required" : false,
+            "type": "string"           
+          },
+          {
+            "in": "query",
+            "name" : "patientIdentifier",
+            "required" : false,
+            "type": "string"           
+          }
+        ],
+          "responses" : {
+            "200" : {
+              "description" : "Success",
+              "schema": {
+                "$ref": "#/definitions/Tests" 
+              }
+            },
+            "500" : {
+              "description" : "Server error"
+            }
+          }
+        }
+      }
+    },
+      
+    
+    "host" : "yourServer",
+    "basePath" : "/rest/aidocapi",
+    
+    "definitions" : {
+        "Patients" : {
+            "type" : "array",
+            "items": {
+                "$ref": "#/definitions/Patient"
+        }},
+        "Tests" : {
+          "type" : "array",
+          "items": {
+              "$ref": "#/definitions/Test"
+      }},
+      "Patient" : {
+        "type" : "object",
+        "properties" : {
+          "first_name" : {
+            "type" : "string"
+          },
+          "last_name" : {
+            "type" : "string"
+          },
+          "gender" : {
+            "type" : "string"
+          },
+          "dob" : {
+            "type" : "string"
+          },
+          "patient_identifier" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Test" : {
+        "type" : "object",
+        "properties" : {
+          "accession_number" : {
+            "type" : "string"
+          },
+          "patient_identifier" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
