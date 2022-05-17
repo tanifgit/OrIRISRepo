@@ -46,7 +46,8 @@ The messages will be routed according to their type - transformed accordingly an
 #### Transformation
 
 Each HL7v2 message will be transformed to the corresponding relevant Interoperability Request Message.
-The ADT_A01 to an `AIDOC.Msg.PatientRequest` -
+
+1. The ADT_A01 to an `AIDOC.Msg.PatientRequest` -
 
 > ![image](https://user-images.githubusercontent.com/10142689/168746103-d94d05be-648c-439f-9e41-ccb1c2d523b4.png)
 
@@ -58,9 +59,13 @@ The transformation uses the ConvertDateTime() method to convert the HL7v2 Date o
 
 And the Lookup() method to convert the HL7v2 Gender value to a different relevant value. E.g. `M` to `Male`.
 
+This is the Lookup table -
+
+> ![image](https://user-images.githubusercontent.com/10142689/168845688-dcc933d8-18ee-428d-8b6e-273718163507.png)
+
 This [is a reference](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=EBUS_UTILITY_FUNCTIONS) to the built-in utility functions.
 
-And the ORM_O01 to an `AIDOC.Msg.ImagingTestRequest` -
+2. And the ORM_O01 to an `AIDOC.Msg.ImagingTestRequest` -
 
 > ![image](https://user-images.githubusercontent.com/10142689/168746269-d22823a3-5f6f-405a-aae0-eea31035cdd8.png)
 
@@ -68,3 +73,14 @@ Using the `AIDOC.Trans.ORMO01ToAIDOCImagingTest` Transformation -
 
 > ![image](https://user-images.githubusercontent.com/10142689/168747256-7f1fe206-2b5f-4ede-896b-baa7b8eb132a.png)
 
+This is a sample Visual Trace of the process:
+
+> ![image](https://user-images.githubusercontent.com/10142689/168846446-06f60e35-5c76-474d-b3d5-b3f76fd3b901.png)
+
+You can see the HL7v2 ADT_A01 message before the transformation, and after -
+
+> ![image](https://user-images.githubusercontent.com/10142689/168846623-09e67b82-ed79-4cc8-b380-784a3347e94a.png)
+
+#### Data Creation
+
+The Business Operation takes care of accepting the relevant requests (Patient or ImagingTest) and creating a new record in the relevant table.
