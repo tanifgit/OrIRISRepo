@@ -7,7 +7,7 @@
 - Router Process to transform and send the data
 - Operation to insert the data into tables
 
-![image](https://user-images.githubusercontent.com/10142689/168612333-2540913e-cc8c-45f5-bcf4-4eb0068e2e97.png)
+> ![image](https://user-images.githubusercontent.com/10142689/168612333-2540913e-cc8c-45f5-bcf4-4eb0068e2e97.png)
 
 ## Usage
 
@@ -19,7 +19,7 @@ Simply import the classes into your local Namespace.
 ### Configuration
 The Business Service `From EMR` by default looks for files in ```C:\Temp\HL7\In``` you can change this to a different suitable location by changing the `File Path` setting.
 
-![image](https://user-images.githubusercontent.com/10142689/168745334-e9dc3004-4a11-41ae-9485-20e82f41fadc.png)
+> ![image](https://user-images.githubusercontent.com/10142689/168745334-e9dc3004-4a11-41ae-9485-20e82f41fadc.png)
 
 
 ### Sample Flow
@@ -30,7 +30,7 @@ The Business Service `From EMR` by default looks for files in ```C:\Temp\HL7\In`
   There are some sample files in the `sample_data` folder.
 E.g.:
 
-  ![image](https://user-images.githubusercontent.com/10142689/168631866-9793ac79-d15f-45aa-b215-c45834d2cce6.png)
+  > ![image](https://user-images.githubusercontent.com/10142689/168631866-9793ac79-d15f-45aa-b215-c45834d2cce6.png)
 
 There are 3 files in totoal
 - ADT_A01.hl7: a patient named JAMES MASSIE (no related ORM for him)
@@ -41,24 +41,30 @@ There are 3 files in totoal
 
 The messages will be routed according to their type - transformed accordingly and sent to the business operation:
 
-![image](https://user-images.githubusercontent.com/10142689/168745543-f784cdc9-9f6f-4ccc-80b1-a968f557ae60.png)
+> ![image](https://user-images.githubusercontent.com/10142689/168745543-f784cdc9-9f6f-4ccc-80b1-a968f557ae60.png)
 
 #### Transformation
 
 Each HL7v2 message will be transformed to the corresponding relevant Interoperability Request Message.
 The ADT_A01 to an `AIDOC.Msg.PatientRequest` -
 
-![image](https://user-images.githubusercontent.com/10142689/168746103-d94d05be-648c-439f-9e41-ccb1c2d523b4.png)
+> ![image](https://user-images.githubusercontent.com/10142689/168746103-d94d05be-648c-439f-9e41-ccb1c2d523b4.png)
 
 Using the `AIDOC.Trans.ADTA01ToAIDOCPatient` Transformation -
 
-![image](https://user-images.githubusercontent.com/10142689/168746620-39144f2c-36c8-4b41-8d5f-847d68d24f13.png)
+> ![image](https://user-images.githubusercontent.com/10142689/168746620-39144f2c-36c8-4b41-8d5f-847d68d24f13.png)
+
+The transformation uses the ConvertDateTime() method to convert the HL7v2 Date of Birth format to the internal database format. E.g. `19560129` to `42031` (which is the internal representation of `1956-01-29`)
+
+And the Lookup() method to convert the HL7v2 Gender value to a different relevant value. E.g. `M` to `Male`.
+
+This [is a reference](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=EBUS_UTILITY_FUNCTIONS) to the built-in utility functions.
 
 And the ORM_O01 to an `AIDOC.Msg.ImagingTestRequest` -
 
-![image](https://user-images.githubusercontent.com/10142689/168746269-d22823a3-5f6f-405a-aae0-eea31035cdd8.png)
+> ![image](https://user-images.githubusercontent.com/10142689/168746269-d22823a3-5f6f-405a-aae0-eea31035cdd8.png)
 
 Using the `AIDOC.Trans.ORMO01ToAIDOCImagingTest` Transformation -
 
-![image](https://user-images.githubusercontent.com/10142689/168747256-7f1fe206-2b5f-4ede-896b-baa7b8eb132a.png)
+> ![image](https://user-images.githubusercontent.com/10142689/168747256-7f1fe206-2b5f-4ede-896b-baa7b8eb132a.png)
 
