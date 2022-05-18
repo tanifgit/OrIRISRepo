@@ -29,6 +29,8 @@ From an IRIS session/Terminal, in your desired Namespace, e.g.:
 USER>zn "AIDOC"
 
 AIDOC>do $system.OBJ.ImportDir("<your_path>\OrIRISRepo\src",,"c",,1)
+
+AIDOC>do $system.OBJ.CompilePackage("AIDOC.Trans")
 ```
 
 
@@ -55,6 +57,8 @@ There are 3 files in totoal
 - ADT_A01.hl7: a patient named JAMES MASSIE (no related ORM for him)
 - ADT_A01_Jane.hl7: a patient named Jane Doe - there is an ORM message related to her
 - ORM_O01_Jane.hl7: an Order message for Jane Doe
+
+Jane's ADT message would need to be processed before the her ORM one.
 
 #### Routing 
 
