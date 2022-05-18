@@ -1,5 +1,8 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="IRIS" version="26" zv="IRIS for Windows (x86-64) 2022.1 (Build 140U)" ts="2022-05-18 17:57:47">
+<Document name="Gender.LUT">
 <lookupTable>
 <entry table="Gender" key="F">Female</entry>
 <entry table="Gender" key="M">Male</entry>
 </lookupTable>
+</Document></Export>
