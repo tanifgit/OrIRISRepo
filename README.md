@@ -22,7 +22,7 @@ The Business Service `From EMR` by default looks for files in ```C:\Temp\HL7\In`
 > ![image](https://user-images.githubusercontent.com/10142689/168745334-e9dc3004-4a11-41ae-9485-20e82f41fadc.png)
 
 
-### Sample Flow
+### Sample Inbound Flow
 
 #### HL7 Input
 * Place files into the `File Path` inout folder location. 
@@ -84,3 +84,47 @@ You can see the HL7v2 ADT_A01 message before the transformation, and after -
 #### Data Creation
 
 The Business Operation takes care of accepting the relevant requests (Patient or ImagingTest) and creating a new record in the relevant table.
+
+### Data REST API
+
+Once the data is in the database there is a REST API you can use to retrieve data (simulating the REST API discussed you might with to expose), this is a sample Swagger spec -
+
+> ![image](https://user-images.githubusercontent.com/10142689/169067599-5b87ea7a-fc9e-488e-a5a8-833e5bd92c06.png)
+
+The `dataServiceSwaggerSpec.json` defines the spec and was used to create the stub REST application (via the API Mgmt API).
+
+The `AIDOC.REST.impl` includes the implementation of the API, querying the data and returning the results as JSON.
+
+#### Search Patient by Identifier
+
+For example you can search Patient by their Identifer -
+
+> ![image](https://user-images.githubusercontent.com/10142689/169068016-a2e93a6e-bc33-4837-8106-141a672f8887.png)
+
+And run it like this:
+
+> ![image](https://user-images.githubusercontent.com/10142689/169068252-11de59b1-af40-4ec0-bc61-c80b461f2bd3.png)
+
+Or just get all the Patients (without using the `identifier` parameter) -
+
+> ![image](https://user-images.githubusercontent.com/10142689/169068464-abea539c-95d6-4b5c-ab0f-9dcc7e0dc139.png)
+
+#### Search Imaging Tests (by Accession Number, or Patient Identifier)
+
+> ![image](https://user-images.githubusercontent.com/10142689/169068881-267c3913-139d-4828-beea-5806d4948e36.png)
+
+For example you can search Imaging Tests by their Access Number -
+
+> ![image](https://user-images.githubusercontent.com/10142689/169068973-2f89de07-ec6d-4d77-bbc7-75029a1f70f8.png)
+
+Or by the Patient's Identifier -
+
+> ![image](https://user-images.githubusercontent.com/10142689/169069091-95df5e7f-ada7-491a-aae8-1229ca24d79d.png)
+
+There is a Postman Collection to help with some basic tests -
+
+>  ![image](https://user-images.githubusercontent.com/10142689/169069251-5a7498af-513c-4733-9dd2-d4370c14f1c4.png)
+
+
+
+
