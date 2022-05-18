@@ -12,15 +12,34 @@
 ## Usage
 
 ### Installation / Import
-Simply import the classes into your local Namespace.
+Simply import the source into your local Namespace.
 
 (One of the classes will create a Web Application during the compilation process - /rest/aidocapi)
 
+For example:
+
+From an OS command prompt:
+
+```
+<your_path>>git clone https://github.com/tanifgit/OrIRISRepo.git
+```
+
+From an IRIS session/Terminal, in your desired Namespace, e.g.:
+```
+USER>zn "AIDOC"
+
+AIDOC>do $system.OBJ.ImportDir("<your_path>\OrIRISRepo\src",,"c",,1)
+```
+
+
 ### Configuration
+In the Production Configuration page of the `AIDOCPOCPKG.FoundationProduction` Production:
+
 The Business Service `From EMR` by default looks for files in ```C:\Temp\HL7\In``` you can change this to a different suitable location by changing the `File Path` setting.
 
 > ![image](https://user-images.githubusercontent.com/10142689/168745334-e9dc3004-4a11-41ae-9485-20e82f41fadc.png)
 
+Then Start the Production
 
 ### Sample Inbound Flow
 
