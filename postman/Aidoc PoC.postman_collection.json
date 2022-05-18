@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "6aed66e2-cb28-4c08-b28c-a3469b9f03b4",
+		"name": "Aidoc PoC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API Mgmt [For Dev. Phase]",
+			"item": [
+				{
+					"name": "Update REST API",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"swagger\" : \"2.0\",\r\n\r\n    \"info\" : {\r\n      \"description\" : \"An API for Aidoc data\",\r\n      \"version\" : \"1.0.0\",\r\n      \"title\" : \"Aidoc Data API\",\r\n      \"license\" : {\r\n        \"name\" : \"Apache 2.0\",\r\n        \"url\" : \"http://www.apache.org/licenses/LICENSE-2.0.html\"\r\n      }\r\n    },\r\n    \"schemes\" : [ \"http\", \"https\" ],\r\n    \"paths\" : {\r\n      \"/patient\" : {\r\n        \"get\": {\r\n          \"description\" : \"Search patients\\n\",\r\n          \"operationId\" : \"SearchPatients\",\r\n          \"produces\" : [ \"application/json\" ],\r\n          \"parameters\" : [ {\r\n            \"in\": \"query\",\r\n            \"name\" : \"identifier\",\r\n            \"required\" : false,\r\n            \"type\": \"string\",\r\n            \"default\": \"\"\r\n          }\r\n        ],\r\n          \"responses\" : {\r\n            \"200\" : {\r\n              \"description\" : \"Success\",\r\n              \"schema\": {\r\n                \"$ref\": \"#/definitions/Patients\" \r\n              }\r\n            },\r\n            \"500\" : {\r\n              \"description\" : \"Server error\"\r\n            }\r\n          }\r\n        }\r\n      },\r\n      \"/patient/{id}\" : {\r\n        \"get\" : {\r\n          \"description\" : \"Return a specific Patient by internal id\\n\",\r\n          \"operationId\" : \"GetPatientById\",\r\n          \"produces\" : [ \"application/json\" ],\r\n          \"parameters\" : [ {\r\n            \"in\": \"path\",\r\n            \"name\" : \"id\",\r\n            \"required\" : true,\r\n            \"type\": \"string\"\r\n          }],\r\n          \"responses\" : {\r\n            \"200\" : {\r\n              \"description\" : \"Success\",\r\n              \"schema\": {\r\n                \"$ref\": \"#/definitions/Patient\" \r\n              }\r\n            },\r\n            \"400\" : {\r\n              \"description\" : \"Invalid message body\"\r\n            },\r\n            \"500\" : {\r\n              \"description\" : \"Server error\"\r\n            }\r\n          }\r\n        }\r\n      },\r\n      \"/test\" : {\r\n        \"get\": {\r\n          \"description\" : \"Search imaging tests\\n\",\r\n          \"operationId\" : \"SearchTests\",\r\n          \"produces\" : [ \"application/json\" ],\r\n          \"parameters\" : [ {\r\n            \"in\": \"query\",\r\n            \"name\" : \"accessionNumber\",\r\n            \"required\" : false,\r\n            \"type\": \"string\"\r\n          }\r\n        ],\r\n          \"responses\" : {\r\n            \"200\" : {\r\n              \"description\" : \"Success\",\r\n              \"schema\": {\r\n                \"$ref\": \"#/definitions/Tests\" \r\n              }\r\n            },\r\n            \"500\" : {\r\n              \"description\" : \"Server error\"\r\n            }\r\n          }\r\n        }\r\n      }\r\n    },\r\n      \r\n    \r\n    \"host\" : \"yourServer\",\r\n    \"basePath\" : \"/rest/aidocapi\",\r\n    \r\n    \"definitions\" : {\r\n        \"Patients\" : {\r\n            \"type\" : \"array\",\r\n            \"items\": {\r\n                \"$ref\": \"#/definitions/Patient\"\r\n        }},\r\n        \"Tests\" : {\r\n          \"type\" : \"array\",\r\n          \"items\": {\r\n              \"$ref\": \"#/definitions/Test\"\r\n      }},\r\n      \"Patient\" : {\r\n        \"type\" : \"object\",\r\n        \"properties\" : {\r\n          \"first_name\" : {\r\n            \"type\" : \"string\"\r\n          },\r\n          \"last_name\" : {\r\n            \"type\" : \"string\"\r\n          },\r\n          \"gender\" : {\r\n            \"type\" : \"string\"\r\n          },\r\n          \"dob\" : {\r\n            \"type\" : \"string\"\r\n          },\r\n          \"patient_identifier\" : {\r\n            \"type\" : \"string\"\r\n          }\r\n        }\r\n      },\r\n      \"Test\" : {\r\n        \"type\" : \"object\",\r\n        \"properties\" : {\r\n          \"accession_number\" : {\r\n            \"type\" : \"string\"\r\n          },\r\n          \"patient_identifier\" : {\r\n            \"type\" : \"string\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Protocol}}://{{Server}}:{{Port}}/api/mgmnt/v2/AIDOCPOC/AIDOC.REST",
+							"protocol": "{{Protocol}}",
+							"host": [
+								"{{Server}}"
+							],
+							"port": "{{Port}}",
+							"path": [
+								"api",
+								"mgmnt",
+								"v2",
+								"AIDOCPOC",
+								"AIDOC.REST"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sample Test API Calls",
+			"item": [
+				{
+					"name": "Get all Patients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Protocol}}://{{Server}}:{{Port}}/rest/aidocapi/patient",
+							"protocol": "{{Protocol}}",
+							"host": [
+								"{{Server}}"
+							],
+							"port": "{{Port}}",
+							"path": [
+								"rest",
+								"aidocapi",
+								"patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient by Identifier",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Protocol}}://{{Server}}:{{Port}}/rest/aidocapi/patient?identifier=10201",
+							"protocol": "{{Protocol}}",
+							"host": [
+								"{{Server}}"
+							],
+							"port": "{{Port}}",
+							"path": [
+								"rest",
+								"aidocapi",
+								"patient"
+							],
+							"query": [
+								{
+									"key": "identifier",
+									"value": "10201"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Tests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Protocol}}://{{Server}}:{{Port}}/rest/aidocapi/test",
+							"protocol": "{{Protocol}}",
+							"host": [
+								"{{Server}}"
+							],
+							"port": "{{Port}}",
+							"path": [
+								"rest",
+								"aidocapi",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Test by Accession Number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Protocol}}://{{Server}}:{{Port}}/rest/aidocapi/test?accessionNumber=10520706",
+							"protocol": "{{Protocol}}",
+							"host": [
+								"{{Server}}"
+							],
+							"port": "{{Port}}",
+							"path": [
+								"rest",
+								"aidocapi",
+								"test"
+							],
+							"query": [
+								{
+									"key": "accessionNumber",
+									"value": "10520706"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Test by Patient Identifier",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Protocol}}://{{Server}}:{{Port}}/rest/aidocapi/test?patientIdentifier=099944433",
+							"protocol": "{{Protocol}}",
+							"host": [
+								"{{Server}}"
+							],
+							"port": "{{Port}}",
+							"path": [
+								"rest",
+								"aidocapi",
+								"test"
+							],
+							"query": [
+								{
+									"key": "patientIdentifier",
+									"value": "099944433"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "sys",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "SuperUser",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Server",
+			"value": "localhost",
+			"type": "default"
+		},
+		{
+			"key": "Port",
+			"value": "52773",
+			"type": "default"
+		},
+		{
+			"key": "Protocol",
+			"value": "http",
+			"type": "default"
+		}
+	]
+}

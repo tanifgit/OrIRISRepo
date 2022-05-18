@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<lookupTable>
+<entry table="Gender" key="F">Female</entry>
+<entry table="Gender" key="M">Male</entry>
+</lookupTable>

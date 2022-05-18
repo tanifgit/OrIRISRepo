@@ -84,6 +84,9 @@ ClassMethod QueryRunnerHelper(sql As %String, parameter1 As %String) As %Dynamic
     #dim statement As %SQL.Statement
     set statement = ##class(%SQL.Statement).%New()
 
+    // Select the values with ODBC format conversion (relevant for Dates for example like DOB)
+    set statement.%SelectMode=1
+
     // prepare the query
     set status = statement.%Prepare(sql)
 
